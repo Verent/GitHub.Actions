@@ -1,6 +1,7 @@
-name: Windows-PowerShell
+name: Linux-Bash
 on:
   workflow_dispatch:
+  pull_request:
 
 env:
   env_key: "env_value"
@@ -13,9 +14,8 @@ jobs:
 
       - name: Run a multi-line bash script
         run: |
-          $x = ${{ secrets.SECRET_KEY }}
-          Write-Host Hello $x
-          Write-Host Appdata $env:APPDATA
+          echo "Hello"
+          echo "World"
 
       - name: Run shell script
         run: ./scripts/bash/echo.sh
