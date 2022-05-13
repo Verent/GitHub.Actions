@@ -1,6 +1,8 @@
 name: Windows-PowerShell
 on:
   workflow_dispatch:
+  pull_request:
+
 
 env:
   env_key: "env_value"
@@ -14,13 +16,19 @@ jobs:
       - name: Run a multi-line ps1 script
         shell: pwsh
         run: |
-          $x = ${{ secrets.SECRET_KEY }}
-          Write-Host Hello $x
-          Write-Host Appdata $env:APPDATA
+          Write-Host Global variable: $env:env_key
+          Write-Host Local variable: $env:GH_VAR
+          Write-Host Host variable: $env:APPDATA
+          Write-Host GitHub variable: $env:GITHUB_SHA
+          Write-Host Secret: ${{ secrets.SECRET_KEY }}
+          Write-Host Local Secret: $env:GH_SECRET
+
+        env: 
+          GH_SECRET: ${{ secrets.SECRET_KEY }}
+          GH_VAR: ${{ env.env_key }}
         
       - name: Run shell script
         run: ./scripts/ps/echo.ps1
-
         env: 
-          GA_SECRET: ${{ secrets.SECRET_KEY }}
-          GA_VAR: ${{ env.env_key }}
+          GH_SECRET: ${{ secrets.SECRET_KEY }}
+          GH_VAR: ${{ env.env_key }}

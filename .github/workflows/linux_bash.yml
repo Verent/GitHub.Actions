@@ -1,6 +1,7 @@
-name: Windows-PowerShell
+name: Linux-Bash
 on:
   workflow_dispatch:
+  pull_request:
 
 env:
   env_key: "env_value"
@@ -13,9 +14,15 @@ jobs:
 
       - name: Run a multi-line bash script
         run: |
-          $x = ${{ secrets.SECRET_KEY }}
-          Write-Host Hello $x
-          Write-Host Appdata $env:APPDATA
+          echo "Global variable:" $env:env_key
+          echo "Local variable:" $env:GH_VAR
+          echo "Host variable:" $env:APPDATA
+          echo "GitHub variable:" $env:GITHUB_SHA
+          echo "Secret:" ${{ secrets.SECRET_KEY }}
+          echo "Local Secret:" $env:GH_SECRET
+        env: 
+          GH_SECRET: ${{ secrets.SECRET_KEY }}
+          GH_VAR: ${{ env.env_key }}
 
       - name: Run shell script
         run: ./scripts/bash/echo.sh
