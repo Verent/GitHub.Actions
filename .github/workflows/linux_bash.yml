@@ -1,0 +1,25 @@
+name: Windows-PowerShell
+on:
+  workflow_dispatch:
+
+env:
+  env_key: "env_value"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Run a multi-line bash script
+        run: |
+          $x = ${{ secrets.SECRET_KEY }}
+          Write-Host Hello $x
+          Write-Host Appdata $env:APPDATA
+
+      - name: Run shell script
+        run: ./scripts/bash/echo.sh
+        shell: bash
+        env: 
+          GA_SECRET: ${{ secrets.SECRET_KEY }}
+          GA_VAR: ${{ env.env_key }}

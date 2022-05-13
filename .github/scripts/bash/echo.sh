@@ -1,3 +1,3 @@
+#!/bin/bash
 
-echo $GA_SECRET 
-echo $GA_VAR
+echo "Hello"
