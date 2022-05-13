@@ -17,9 +17,12 @@ jobs:
         shell: pwsh
         run: |
           # $secret = "${{ secrets.SECRET_KEY }}"
-          Write-Host Global Variable $env:env_key
-          Write-Host Hello $env:GH_VAR
-          Write-Host Appdata $env:APPDATA
+          Write-Host Global variable: $env:env_key
+          Write-Host Local variable: $env:GH_VAR
+          Write-Host Host variable: $env:APPDATA
+          Write-Host GitHub variable: $env:GITHUB_SHA
+          Write-Host Secret: ${{ secrets.SECRET_KEY }}
+          Write-Host Local Secret: $env:GH_SECRET
           gci
         env: 
           GH_SECRET: ${{ secrets.SECRET_KEY }}
@@ -27,6 +30,6 @@ jobs:
         
       - name: Run shell script
         run: ./scripts/ps/echo.ps1
-        # env: 
-        #   GH_SECRET: ${{ secrets.SECRET_KEY }}
-        #   GH_VAR: ${{ env.env_key }}
+        env: 
+          GH_SECRET: ${{ secrets.SECRET_KEY }}
+          GH_VAR: ${{ env.env_key }}
