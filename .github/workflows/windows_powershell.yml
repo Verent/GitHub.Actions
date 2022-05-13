@@ -19,6 +19,8 @@ jobs:
           $secret = ${{ secrets.SECRET_KEY }}
           Write-Host Hello $env:GH_VAR
           Write-Host Appdata $env:APPDATA
+          gci
+          
         env: 
           GH_SECRET: ${{ secrets.SECRET_KEY }}
           GH_VAR: ${{ env.env_key }}

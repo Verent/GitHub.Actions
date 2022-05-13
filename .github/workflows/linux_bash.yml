@@ -16,6 +16,7 @@ jobs:
         run: |
           echo "Hello"
           echo "World"
+          ls -lah
 
       - name: Run shell script
         run: ./scripts/bash/echo.sh
