@@ -16,14 +16,13 @@ jobs:
       - name: Run a multi-line ps1 script
         shell: pwsh
         run: |
-          # $secret = "${{ secrets.SECRET_KEY }}"
           Write-Host Global variable: $env:env_key
           Write-Host Local variable: $env:GH_VAR
           Write-Host Host variable: $env:APPDATA
           Write-Host GitHub variable: $env:GITHUB_SHA
           Write-Host Secret: ${{ secrets.SECRET_KEY }}
           Write-Host Local Secret: $env:GH_SECRET
-          gci
+
         env: 
           GH_SECRET: ${{ secrets.SECRET_KEY }}
           GH_VAR: ${{ env.env_key }}

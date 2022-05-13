@@ -16,7 +16,16 @@ jobs:
         run: |
           echo "Hello"
           echo "World"
-
+          echo "Global variable:" $env:env_key
+          echo "Local variable:" $env:GH_VAR
+          echo "Host variable:" $env:APPDATA
+          echo "GitHub variable:" $env:GITHUB_SHA
+          echo "Secret:" ${{ secrets.SECRET_KEY }}
+          echo "Local Secret:" $env:GH_SECRET
+        env: 
+          GH_SECRET: ${{ secrets.SECRET_KEY }}
+          GH_VAR: ${{ env.env_key }}
+          
       - name: Run shell script
         run: ./scripts/bash/echo.sh
         shell: bash
