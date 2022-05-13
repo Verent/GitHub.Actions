@@ -16,17 +16,17 @@ jobs:
       - name: Run a multi-line ps1 script
         shell: pwsh
         run: |
-          $secret = ${{ secrets.SECRET_KEY }}
+          # $secret = "${{ secrets.SECRET_KEY }}"
+          Write-Host Global Variable $env:env_key
           Write-Host Hello $env:GH_VAR
           Write-Host Appdata $env:APPDATA
           gci
-          
         env: 
           GH_SECRET: ${{ secrets.SECRET_KEY }}
           GH_VAR: ${{ env.env_key }}
         
       - name: Run shell script
         run: ./scripts/ps/echo.ps1
-        env: 
-          GH_SECRET: ${{ secrets.SECRET_KEY }}
-          GH_VAR: ${{ env.env_key }}
+        # env: 
+        #   GH_SECRET: ${{ secrets.SECRET_KEY }}
+        #   GH_VAR: ${{ env.env_key }}
