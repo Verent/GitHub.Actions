@@ -14,8 +14,6 @@ jobs:
 
       - name: Run a multi-line bash script
         run: |
-          echo "Hello"
-          echo "World"
           echo "Global variable:" $env:env_key
           echo "Local variable:" $env:GH_VAR
           echo "Host variable:" $env:APPDATA
@@ -25,7 +23,7 @@ jobs:
         env: 
           GH_SECRET: ${{ secrets.SECRET_KEY }}
           GH_VAR: ${{ env.env_key }}
-          
+
       - name: Run shell script
         run: ./scripts/bash/echo.sh
         shell: bash
