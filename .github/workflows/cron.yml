@@ -1,0 +1,16 @@
+name: Linux-Bash
+on:
+  schedule:
+    # * is a special character in YAML so you have to quote this string
+    - cron:  '15 * 25 5 *'
+env:
+  env_key: "env_value"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Run an inline bash script
+        run: |
+          echo $(date)

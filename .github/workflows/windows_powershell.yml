@@ -3,7 +3,6 @@ on:
   workflow_dispatch:
   pull_request:
 
-
 env:
   env_key: "env_value"
 
@@ -22,12 +21,11 @@ jobs:
           Write-Host GitHub variable: $env:GITHUB_SHA
           Write-Host Secret: ${{ secrets.SECRET_KEY }}
           Write-Host Local Secret: $env:GH_SECRET
-
         env: 
           GH_SECRET: ${{ secrets.SECRET_KEY }}
           GH_VAR: ${{ env.env_key }}
         
-      - name: Run shell script
+      - name: Run ps1 script
         run: ./scripts/ps/echo.ps1
         env: 
           GH_SECRET: ${{ secrets.SECRET_KEY }}
