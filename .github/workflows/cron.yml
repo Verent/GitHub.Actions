@@ -1,8 +1,9 @@
-name: Linux-Bash
+name: Schedule Cron
 on:
+  workflow_dispatch:
   schedule:
     # * is a special character in YAML so you have to quote this string
-    - cron:  '15 * 25 5 *'
+    - cron:  '*/15 * * * *'
 env:
   env_key: "env_value"
 
