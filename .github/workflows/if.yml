@@ -1,0 +1,19 @@
+name: If is tagged
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set git IS_TAGGED
+        id: git
+        run: |
+          IT_TAGGED = $(git rev-list --count "$(git describe --tags --abbrev=0)..HEAD") -ne '0'
+          echo $IS_TAGGED
+          echo "::set-output name=$IS_TAGGED
+
+      - name: test4
+        run: echo hoge
+        if: steps.git.outputs.IS_TAGGED
